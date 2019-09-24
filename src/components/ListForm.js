@@ -5,6 +5,7 @@ import DetailForm from './DetailForm'
 
 class ListForm extends React.Component {
   render(){
+    console.log("todo")
     var { tasks  } = this.props;
     var elmTasks = tasks.map((task, index) => {
       return <DetailForm
@@ -32,5 +33,11 @@ class ListForm extends React.Component {
   );
 }
 }
+const mapStateToProps = (state) =>{
+    return {
+      tasks : state.tasks
+    }
+};
 
-export default ListForm;
+export default connect(mapStateToProps)(ListForm);
+

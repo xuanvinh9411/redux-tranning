@@ -4,7 +4,6 @@ import TaskForm from './components/TaskForm';
 import SearchForm from './components/SearchForm';
 import ListForm from './components/ListForm';
 import _ from 'lodash';
-import demo from './trainning/demo'
 
 class App extends React.Component {
 
@@ -268,7 +267,7 @@ class App extends React.Component {
                         </div>
                         <div className="row mt-15">
                             <ListForm
-                                tasks={tasks}
+                                // tasks={tasks}
                                 onUpdateStatus={this.onUpdateStatus}
                                 onDelete={this.onDelete}
                                 onUpdate={this.onUpdate}
