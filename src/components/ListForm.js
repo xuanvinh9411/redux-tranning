@@ -2,10 +2,10 @@ import React from 'react';
 import HeaderList from './HeaderList'
 import InputList from './InputList'
 import DetailForm from './DetailForm'
+import { connect } from 'react-redux';
 
 class ListForm extends React.Component {
   render(){
-    console.log("todo")
     var { tasks  } = this.props;
     var elmTasks = tasks.map((task, index) => {
       return <DetailForm

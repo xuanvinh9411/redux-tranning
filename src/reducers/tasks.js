@@ -1,14 +1,25 @@
 import * as types from './../constants/ActionTypes'
 
 var initalState = [{
-        test : 'asv'
-    }]
-;
+    id: 1,
+    name: 'Học lạp trình1',
+    status: true
+},
 
-export var tasks = ( state = initalState, action) =>{
-    switch(action.type){
+{
+    id: 2,
+    name: 'Học lạp trình2',
+    status: false
+},]
+    ;
+
+export var tasks = (state = initalState, action) => {
+    switch (action.type) {
         case types.LIST_ALL:
             return state;
-            default : return state;
+        case types.ADD_TASK:
+            console.log(action);
+            return state;
+        default: return state;
     }
 }

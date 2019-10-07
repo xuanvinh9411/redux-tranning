@@ -10,23 +10,23 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            tasks: [
+        //     tasks: [
 
-            ],
-            tasksEditing: [
+        //     ],
+        //     tasksEditing: [
 
-            ],
+        //     ],
             isDisplayForm: false
-            ,
-            filter: {
-                name: '',
-                status: -1
+        //     ,
+        //     filter: {
+        //         name: '',
+        //         status: -1
 
-            }
-            ,
-            keyword: '',
-            sortBy: 'name',
-            sortValue: 1
+        //     }
+        //     ,
+        //     keyword: '',
+        //     sortBy: 'name',
+        //     sortValue: 1
         }
     }
     componentWillMount() {
@@ -96,24 +96,24 @@ class App extends React.Component {
     generateID() {
         return this.s4() + this.s4() + '_' + this.s4() + '_'
     }
-    onSubmit = (data) => {
-        var tasks = this.state.tasks;
-        if (data.id === null || data.id === "") {
-            data.id = this.generateID();
-            tasks.push(data);
-        }
-        else {
-            var index = this.dindex(data.id);
-            tasks[index] = data;
-        }
-        this.setState(
-            {
-                tasks: tasks,
-                tasksEditing: null
-            }
-        )
-        localStorage.setItem('tasks', JSON.stringify(tasks));
-    }
+    // onSubmit = (data) => {
+    //     // var tasks = this.state.tasks;
+    //     if (data.id === null || data.id === "") {
+    //         data.id = this.generateID();
+    //         tasks.push(data);
+    //     }
+    //     else {
+    //         var index = this.dindex(data.id);
+    //         tasks[index] = data;
+    //     }
+    //     this.setState(
+    //         {
+    //             tasks: tasks,
+    //             tasksEditing: null
+    //         }
+    //     )
+    //     localStorage.setItem('tasks', JSON.stringify(tasks));
+    // }
     
     onUpdateStatus = (id) => {
         var { tasks } = this.state;
@@ -186,7 +186,8 @@ class App extends React.Component {
     }
 
     render() {
-        var { tasks,
+        var { 
+            // tasks,
             isDisplayForm,
             tasksEditing,
             filter,
@@ -195,43 +196,43 @@ class App extends React.Component {
             sortValue
         }
             = this.state;
-        if (filter) {
-            if (filter.name) {
-                tasks = tasks.filter(task => {
-                    return task.name.toLowerCase().indexOf(filter.name) !== -1;
-                });
+        // if (filter) {
+        //     if (filter.name) {
+        //         tasks = tasks.filter(task => {
+        //             return task.name.toLowerCase().indexOf(filter.name) !== -1;
+        //         });
                 
-            }
-            tasks = tasks.filter(task => {
-                if (filter.status == -1) {
-                    return task
-                } else {
-                    return task.status === (filter.status === 1 ? true : false)
-                }
-            })
-        }
-        if (keyword && keyword !== "") {
-            // tasks = tasks.filter(task => {
-            //     return task.name.indexOf(keyword.keyword) !== -1;
-            // });
-            tasks = _.filter(tasks,(task) =>{
-                return task.name.toLowerCase().indexOf(keyword.keyword.toLowerCase()) !== -1
-                })
-        }
+        //     }
+        //     tasks = tasks.filter(task => {
+        //         if (filter.status == -1) {
+        //             return task
+        //         } else {
+        //             return task.status === (filter.status === 1 ? true : false)
+        //         }
+        //     })
+        // }
+        // if (keyword && keyword !== "") {
+        //     // tasks = tasks.filter(task => {
+        //     //     return task.name.indexOf(keyword.keyword) !== -1;
+        //     // });
+        //     tasks = _.filter(tasks,(task) =>{
+        //         return task.name.toLowerCase().indexOf(keyword.keyword.toLowerCase()) !== -1
+        //         })
+        // }
 
-        if (sortBy === 'name'){
-            tasks = tasks.sort((a,b) =>{
-                if(a.name > b.name) return sortValue ;
-                else if(a.name < b.name) return -sortValue ;
-                else return 0 ;
-            })
-        }else{
-            tasks = tasks.sort((a,b) =>{
-                if(a.status > b.status) return -sortValue ;
-                else if(a.status < b.status) return sortValue ;
-                else return 0 ;
-            })
-        }
+        // if (sortBy === 'name'){
+        //     tasks = tasks.sort((a,b) =>{
+        //         if(a.name > b.name) return sortValue ;
+        //         else if(a.name < b.name) return -sortValue ;
+        //         else return 0 ;
+        //     })
+        // }else{
+        //     tasks = tasks.sort((a,b) =>{
+        //         if(a.status > b.status) return -sortValue ;
+        //         else if(a.status < b.status) return sortValue ;
+        //         else return 0 ;
+        //     })
+        // }
         var elmTaskForm = isDisplayForm
             ? <TaskForm
                 onSubmit={this.onSubmit}

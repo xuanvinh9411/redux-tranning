@@ -7,8 +7,7 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import  { myReducer } from '../src/reducers/index';
 
-const store = createStore(myReducer)
-
+const store = createStore(myReducer);
 ReactDOM.render(
     <Provider  store = { store }>
         <App />
