@@ -37,31 +37,6 @@ class App extends React.Component {
             });
         }
     }
-    onGenerateData = () => {
-        var tasks = [
-            {
-                id: this.generateID(),
-                name: 'Học lạp trình1',
-                status: true
-            },
-
-            {
-                id: this.generateID(),
-                name: 'Học lạp trình2',
-                status: false
-            },
-            {
-                id: this.generateID(),
-                name: 'Học lạp trình3',
-                status: false
-            }
-        ];
-        this.setState({
-            tasks: tasks
-        });
-        localStorage.setItem('tasks', JSON.stringify(tasks));
-    }
-
     addForm = () => {
         if (this.state.isDisplayForm && this.state.tasksEditing !== null) {
             this.setState({
@@ -90,12 +65,7 @@ class App extends React.Component {
         })
     }
 
-    s4() {
-        return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
-    }
-    generateID() {
-        return this.s4() + this.s4() + '_' + this.s4() + '_'
-    }
+    
     // onSubmit = (data) => {
     //     // var tasks = this.state.tasks;
     //     if (data.id === null || data.id === "") {
