@@ -7,7 +7,8 @@ class ListForm extends React.Component {
         this.props.onUpdateStatus(this.props.task.id)
      }
      onDelete =() =>{
-        this.props.onDelete()
+        this.props.onDeleteTask(this.props.task.id )
+        this.props.onCloseForm()
      }
      onUpdate =() =>{
         this.props.onUpdate(this.props.task.id)
@@ -57,6 +58,12 @@ const mapDispatchToprops = (dispatch , props) =>{
     return {
         onUpdateStatus : (id) =>{
             dispatch(action.updatestatus(id)) ;
+        },
+        onDeleteTask : (id) =>{
+            dispatch(action.deletetask(id));
+        },
+        onCloseForm: () =>{
+            dispatch(action.closeform())
         }
     }
 }

@@ -55,19 +55,6 @@ class App extends React.Component {
         this.props.onToggleForm()
     }
 
-    onDelete = (id) => {
-        var { tasks } = this.state;
-        var index = this.findIndex(id);
-        if (index !== -1) {
-            tasks.splice(index, 1);
-            this.setState({
-                tasks: tasks
-            })
-        }
-        localStorage.setItem('tasks', JSON.stringify(tasks));
-        this.closeForm()
-    }
-
     onUpdate = (id) => {
         var { tasks } = this.state
         var index = this.findIndex(id);
@@ -183,7 +170,6 @@ class App extends React.Component {
                         <div className="row mt-15">
                             <ListForm
                                 // tasks={tasks}
-                                onDelete={this.onDelete}
                                 onUpdate={this.onUpdate}
                                 onFilter={this.onFilter}
                             />

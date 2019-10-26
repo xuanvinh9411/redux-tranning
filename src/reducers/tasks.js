@@ -48,9 +48,13 @@ export var tasks = (state = initalState, action) => {
         case types.UPDATE_STATUS:
             var id = action.id
             var index = findIndex(state,id)
-            console.log(index)
             state[index].status = !state[index].status
-            console.log(state)
+            localStorage.setItem('task', JSON.stringify(state));
+            return [...state]
+        case types.DELETE_TASK:
+            var id = action.id
+            var index = findIndex(state,id)
+            state.splice([index],1)
             localStorage.setItem('task', JSON.stringify(state));
             return [...state]
         default: return state;
