@@ -37,7 +37,7 @@ class TaskForm extends React.Component {
         }
     }
     closeForm =() =>{
-        this.props.closeForm()
+        this.props.onCloseForm()
     }
     onChange =(event)=>{
         var target = event.target;
@@ -67,14 +67,14 @@ class TaskForm extends React.Component {
   return (
     <div className="panel panel-warning">
         <div className="panel-heading">
-            <h3 className="panel-title">
+            <div className="panel-title cus-head-left">
             { id === null || id ===  '' ?  'Thêm Công Việc' : 'Cập nhật công việc '} 
-            <span 
-            className="fa fa-times-circle text-right" 
+            </div>   
+            <div 
+            className="fa fa-times-circle text-right cus-icon-left" 
             onClick ={this.closeForm }
             >
-                 </span>
-            </h3>   
+            </div>
         </div>
         <div className="panel-body">
             <form 
@@ -127,6 +127,9 @@ const mapDispatchToprops = (dispatch , props) =>{
     return {
         onAddTask : (task) =>{
             dispatch(action.addTask(task)) ;
+        },
+        onCloseForm: () =>{
+            dispatch(action.closeform())
         }
     }
 }

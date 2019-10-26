@@ -19,6 +19,16 @@ var randomID = () => {
     return s4() + s4() + '_' + s4() + '_';
 }
 
+var findIndex = (tasks,id) => {
+    var result = -1;
+    tasks.forEach((task, index) => {
+        if (task.id === id) {
+            result = index;
+        }
+    });
+    return result;
+};
+
 var Data = JSON.parse(localStorage.getItem('task'));
 var initalState = Data ? Data : [];
 
@@ -35,6 +45,14 @@ export var tasks = (state = initalState, action) => {
             state.push(newTask);
             localStorage.setItem('task',JSON.stringify(state));
             return [...state];
+        case types.UPDATE_STATUS:
+            var id = action.id
+            var index = findIndex(state,id)
+            console.log(index)
+            state[index].status = !state[index].status
+            console.log(state)
+            localStorage.setItem('task', JSON.stringify(state));
+            return [...state]
         default: return state;
     }
 }

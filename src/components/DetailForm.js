@@ -1,11 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import * as action from './../actions/index';
 
 class ListForm extends React.Component {
     onUpdateStatus =() =>{
         this.props.onUpdateStatus(this.props.task.id)
      }
      onDelete =() =>{
-        this.props.onDelete(this.props.task.id)
+        this.props.onDelete()
      }
      onUpdate =() =>{
         this.props.onUpdate(this.props.task.id)
@@ -46,5 +48,18 @@ class ListForm extends React.Component {
   );
 }
 }
+const mapStateToProps = state =>{
+    return {
+        tasks : state.tasks
+    }
+};
+const mapDispatchToprops = (dispatch , props) =>{
+    return {
+        onUpdateStatus : (id) =>{
+            dispatch(action.updatestatus(id)) ;
+        }
+    }
+}
 
-export default ListForm;
+export default connect(mapStateToProps,mapDispatchToprops)(ListForm);
+
