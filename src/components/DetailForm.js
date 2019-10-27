@@ -10,15 +10,16 @@ class ListForm extends React.Component {
         this.props.onDeleteTask(this.props.task.id )
         this.props.onCloseForm()
      }
-     onUpdate =() =>{
-        this.props.onUpdate(this.props.task.id)
+     onEditItem =() =>{
+        this.props.onEditItem(this.props.task);
+        this.props.onOpenForm()
      }
      
   render() {
       var{ task , index} = this.props;
   return (
             <tr>
-                <td>{ index }</td>
+                <td className="text-center">{ index }</td>
                 <td>{ task.name }</td>
                 <td className="text-center">
                     <span 
@@ -32,7 +33,7 @@ class ListForm extends React.Component {
                     <button 
                         type="button" 
                         className="btn btn-warning"
-                        onClick = { this.onUpdate }
+                        onClick = { this.onEditItem }
                         >
                         <span className="fa fa-pencil mr-5"></span>Sửa
                     </button>
@@ -63,8 +64,15 @@ const mapDispatchToprops = (dispatch , props) =>{
             dispatch(action.deletetask(id));
         },
         onCloseForm: () =>{
-            dispatch(action.closeform())
+            dispatch(action.closeform());
+        },
+        onOpenForm : () =>{
+            dispatch(action.openform());
+        },
+        onEditItem : (task) =>{
+            dispatch(action.edititem(task))
         }
+
     }
 }
 

@@ -1,16 +1,14 @@
 import * as types from '../constants/ActionTypes'
-var initalState = true;
+var initalState = false;
 
 export var isDisplayForm = (state = initalState, action) => {
     switch (action.type) {
         case types.TOGGLE_FORM:
             return !state;
         case types.OPEN_FORM:
-            state = true
-            return state;
+            return true;
         case types.CLOSE_FORM:
-            state = false
-            return state;
+            return false;
         default: return state;
     }
 }

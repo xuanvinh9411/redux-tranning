@@ -31,6 +31,8 @@ var findIndex = (tasks,id) => {
 
 var Data = JSON.parse(localStorage.getItem('task'));
 var initalState = Data ? Data : [];
+var id = '';
+var index = '';
 
 export var tasks = (state = initalState, action) => {
     switch (action.type) {
@@ -46,14 +48,14 @@ export var tasks = (state = initalState, action) => {
             localStorage.setItem('task',JSON.stringify(state));
             return [...state];
         case types.UPDATE_STATUS:
-            var id = action.id
-            var index = findIndex(state,id)
+             id = action.id
+             index = findIndex(state,id)
             state[index].status = !state[index].status
             localStorage.setItem('task', JSON.stringify(state));
             return [...state]
         case types.DELETE_TASK:
-            var id = action.id
-            var index = findIndex(state,id)
+             id = action.id
+             index = findIndex(state,id)
             state.splice([index],1)
             localStorage.setItem('task', JSON.stringify(state));
             return [...state]

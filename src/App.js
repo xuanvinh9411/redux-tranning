@@ -3,7 +3,7 @@ import './App.css';
 import TaskForm from './components/TaskForm';
 import SearchForm from './components/SearchForm';
 import ListForm from './components/ListForm';
-import _ from 'lodash';
+// import _ from 'lodash';
 import { connect } from 'react-redux'
 import * as Action from './actions/index'
 
@@ -51,7 +51,7 @@ class App extends React.Component {
     }
 
 
-    onToggleForm = () =>{
+    onToggleForm = () => {
         this.props.onToggleForm()
     }
 
@@ -91,8 +91,8 @@ class App extends React.Component {
         var {
             // tasks,
             tasksEditing,
-            filter,
-            keyword,
+            // filter,
+            // keyword,
             sortBy,
             sortValue
         }
@@ -135,12 +135,6 @@ class App extends React.Component {
         //         else return 0 ;
         //     })
         // }
-        var elmTaskForm = isDisplayForm
-            ? <TaskForm
-                onSubmit={this.onSubmit}
-                task={tasksEditing}
-            />
-            : '';
         return (
             <div className="container">
                 <div className="text-center">
@@ -149,7 +143,10 @@ class App extends React.Component {
                 </div>
                 <div className="row">
                     <div className={isDisplayForm ? 'col-xs-4 col-sm-4 col-md-4 col-lg-4' : ''}>
-                        {elmTaskForm}
+                        <TaskForm
+                            onSubmit={this.onSubmit}
+                            task={tasksEditing}
+                        />
                     </div>
                     <div className={isDisplayForm ? 'col-xs-8 col-sm-8 col-md-8 col-lg-8' : 'col-xs-12 col-sm-12 col-md-12 col-lg-12'}>
                         <button

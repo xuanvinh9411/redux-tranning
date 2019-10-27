@@ -3,136 +3,137 @@ import * as action from './../actions/index'
 import { connect } from 'react-redux';
 
 class TaskForm extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
-            id : '',
-            name : '',
+            id: '',
+            name: '',
             status: false
         }
     }
-    componentWillMount(){
-        if(this.props.task){
-             this.setState({
-                 id : this.props.task.id,
-                 name : this.props.task.name,
-                 status : this.props.task.status
-             })
+    componentWillMount() {
+        if (this.props.task) {
+            this.setState({
+                id: this.props.task.id,
+                name: this.props.task.name,
+                status: this.props.task.status
+            })
         }
     }
-    componentWillReceiveProps(nextProps){
-        if(nextProps && nextProps.task ){
+    componentWillReceiveProps(nextProps) {
+        if (nextProps && nextProps.task) {
             this.setState({
                 id: nextProps.task.id,
                 name: nextProps.task.name,
                 status: nextProps.task.status
             })
-        }else if(nextProps && nextProps.task === null)
-        {
+        } else if (nextProps && nextProps.task === null) {
             this.setState({
-                id : '',
-                name : '',
+                id: '',
+                name: '',
                 status: false
             })
         }
     }
-    closeForm =() =>{
+    closeForm = () => {
         this.props.onCloseForm()
     }
-    onChange =(event)=>{
+    onChange = (event) => {
         var target = event.target;
         var name = target.name;
         var value = target.value
-        if(name ==='status' ){
-            value = target.value === "true" ?  true :  false
+        if (name === 'status') {
+            value = target.value === "true" ? true : false
         }
         this.setState({
-        [name] : value
+            [name]: value
         });
     }
-    onSubmit =(event) =>{
+    onSubmit = (event) => {
         event.preventDefault();
         this.props.onAddTask(this.state);
-         this.onClear();
-         this.closeForm();
+        this.onClear();
+        this.closeForm();
     }
-    onClear =() =>{
+    onClear = () => {
         this.setState({
-            name : '',
+            name: '',
             status: false
         })
     }
     render() {
         var { id } = this.state;
-  return (
-    <div className="panel panel-warning">
-        <div className="panel-heading">
-            <div className="panel-title cus-head-left">
-            { id === null || id ===  '' ?  'Thêm Công Việc' : 'Cập nhật công việc '} 
-            </div>   
-            <div 
-            className="fa fa-times-circle text-right cus-icon-left" 
-            onClick ={this.closeForm }
-            >
-            </div>
-        </div>
-        <div className="panel-body">
-            <form 
-            onSubmit={this.onSubmit}
-             >
-                <div className="form-group">
-                    <label>Tên :</label>
-                    <input 
-                    type="text" 
-                    className="form-control" 
-                    name="name" 
-                    value = {this.state.name}
-                    onChange = {this.onChange}
-                    />
-                </div>
-                <label>Trạng Thái :</label>
-                <select 
-                    className="form-control" 
-                    required="required"
-                    name="status" 
-                    value = {this.state.status}
-                    onChange = {this.onChange}
+        if (!this.props.isDisplayForm) return '';
+        return (
+            <div className="panel panel-warning">
+                <div className="panel-heading">
+                    <div className="panel-title cus-head-left">
+                        {id === null || id === '' ? 'Thêm Công Việc' : 'Cập nhật công việc '}
+                    </div>
+                    <div
+                        className="fa fa-times-circle text-right cus-icon-left"
+                        onClick={this.closeForm}
                     >
-                    <option value={true}>Kích Hoạt</option>
-                    <option value={false}>Ẩn</option>
-                </select>
-                <br/>
-                <div className="text-center">
-                    <button type="submit" className="btn btn-warning">Thêm</button>&nbsp;
-                    <button 
-                        type="button"
-                        onClick={this.onClear} 
-                        className="btn btn-danger">
-                            Hủy Bỏ
-                    </button>
+                    </div>
                 </div>
-            </form>
-        </div>
-    </div>
-  );
-}
+                <div className="panel-body">
+                    <form
+                        onSubmit={this.onSubmit}
+                    >
+                        <div className="form-group">
+                            <label>Tên :</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                name="name"
+                                value={this.state.name}
+                                onChange={this.onChange}
+                            />
+                        </div>
+                        <label>Trạng Thái :</label>
+                        <select
+                            className="form-control"
+                            required="required"
+                            name="status"
+                            value={this.state.status}
+                            onChange={this.onChange}
+                        >
+                            <option value={true}>Kích Hoạt</option>
+                            <option value={false}>Ẩn</option>
+                        </select>
+                        <br />
+                        <div className="text-center">
+                            <button type="submit" className="btn btn-warning">Thêm</button>&nbsp;
+                    <button
+                                type="button"
+                                onClick={this.onClear}
+                                className="btn btn-danger">
+                                Hủy Bỏ
+                    </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        );
+    }
 }
 
-const mapStateToProps = state =>{
+const mapStateToProps = state => {
     return {
-      tasks : state.tasks
+        tasks: state.tasks,
+        isDisplayForm: state.isDisplayForm
     }
 };
-const mapDispatchToprops = (dispatch , props) =>{
+const mapDispatchToprops = (dispatch, props) => {
     return {
-        onAddTask : (task) =>{
-            dispatch(action.addTask(task)) ;
+        onAddTask: (task) => {
+            dispatch(action.addTask(task));
         },
-        onCloseForm: () =>{
+        onCloseForm: () => {
             dispatch(action.closeform())
         }
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToprops)(TaskForm);
+export default connect(mapStateToProps, mapDispatchToprops)(TaskForm);
 
