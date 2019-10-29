@@ -21,13 +21,15 @@ class TaskForm extends React.Component {
         }
     }
     componentWillReceiveProps(nextProps) {
-        if (nextProps && nextProps.task) {
+        console.log(this.props.itemEditing);
+        console.log(nextProps.itemEditing)
+        if (nextProps && nextProps.itemEditing) {
             this.setState({
-                id: nextProps.task.id,
-                name: nextProps.task.name,
-                status: nextProps.task.status
+                id: nextProps.itemEditing.id,
+                name: nextProps.itemEditing.name,
+                status: nextProps.itemEditing.status
             })
-        } else if (nextProps && nextProps.task === null) {
+        } else if (nextProps && nextProps.itemEditing === null) {
             this.setState({
                 id: '',
                 name: '',
@@ -121,7 +123,8 @@ class TaskForm extends React.Component {
 const mapStateToProps = state => {
     return {
         tasks: state.tasks,
-        isDisplayForm: state.isDisplayForm
+        isDisplayForm: state.isDisplayForm,
+        itemEditing : state.itemEditing
     }
 };
 const mapDispatchToprops = (dispatch, props) => {

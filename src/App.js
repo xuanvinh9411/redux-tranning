@@ -58,9 +58,9 @@ class App extends React.Component {
     onUpdate = (id) => {
         var { tasks } = this.state
         var index = this.findIndex(id);
-        var tasksEditing = tasks[index]
+        // var tasksEditing = tasks[index]
         this.setState({
-            tasksEditing: tasksEditing
+            // tasksEditing: tasksEditing
         })
         this.showForm();
     }
@@ -90,7 +90,7 @@ class App extends React.Component {
     render() {
         var {
             // tasks,
-            tasksEditing,
+            // tasksEditing,
             // filter,
             // keyword,
             sortBy,
@@ -145,7 +145,6 @@ class App extends React.Component {
                     <div className={isDisplayForm ? 'col-xs-4 col-sm-4 col-md-4 col-lg-4' : ''}>
                         <TaskForm
                             onSubmit={this.onSubmit}
-                            task={tasksEditing}
                         />
                     </div>
                     <div className={isDisplayForm ? 'col-xs-8 col-sm-8 col-md-8 col-lg-8' : 'col-xs-12 col-sm-12 col-md-12 col-lg-12'}>

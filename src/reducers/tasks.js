@@ -1,17 +1,5 @@
 import * as types from './../constants/ActionTypes'
 
-// var initalState = [{
-//     id: 1,
-//     name: 'Học lạp trình1',
-//     status: true
-// },
-
-// {
-//     id: 2,
-//     name: 'Học lạp trình2',
-//     status: false
-// },]
-//     ;
 var s4 = () => {
     return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
 }

@@ -11,8 +11,8 @@ class ListForm extends React.Component {
         this.props.onCloseForm()
      }
      onEditItem =() =>{
-        this.props.onEditItem(this.props.task);
         this.props.onOpenForm()
+        this.props.onEditItem(this.props.task);
      }
      
   render() {
