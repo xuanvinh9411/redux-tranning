@@ -5,11 +5,11 @@ import { connect } from 'react-redux';
 class TaskForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            id: '',
-            name: '',
-            status: false
-        }
+        // this.state = {
+        //     id: '',
+        //     name: '',
+        //     status: true
+        // }
     }
     componentWillMount() {
         if (this.props.task) {
@@ -21,8 +21,6 @@ class TaskForm extends React.Component {
         }
     }
     componentWillReceiveProps(nextProps) {
-        console.log(this.props.itemEditing);
-        console.log(nextProps.itemEditing)
         if (nextProps && nextProps.itemEditing) {
             this.setState({
                 id: nextProps.itemEditing.id,
@@ -36,6 +34,7 @@ class TaskForm extends React.Component {
                 status: false
             })
         }
+
     }
     closeForm = () => {
         this.props.onCloseForm()
@@ -45,27 +44,27 @@ class TaskForm extends React.Component {
         var name = target.name;
         var value = target.value
         if (name === 'status') {
-            value = target.value === "true" ? true : false
+            value = target.value === 'true' ? true : false
         }
         this.setState({
             [name]: value
-        });
+        })
     }
     onSubmit = (event) => {
         event.preventDefault();
-        this.props.onAddTask(this.state);
+        this.props.onSaveTask(this.state);
         this.onClear();
         this.closeForm();
     }
     onClear = () => {
         this.setState({
             name: '',
-            status: false
+            status: true
         })
     }
     render() {
-        var { id } = this.state;
-        if (!this.props.isDisplayForm) return '';
+        var { id } = this.props.itemEditing ;
+        if (!this.props.isDisplayForm) return null;
         return (
             <div className="panel panel-warning">
                 <div className="panel-heading">
@@ -79,9 +78,7 @@ class TaskForm extends React.Component {
                     </div>
                 </div>
                 <div className="panel-body">
-                    <form
-                        onSubmit={this.onSubmit}
-                    >
+                    <form onSubmit={this.onSubmit} >
                         <div className="form-group">
                             <label>Tên :</label>
                             <input
@@ -90,7 +87,7 @@ class TaskForm extends React.Component {
                                 name="name"
                                 value={this.state.name}
                                 onChange={this.onChange}
-                            />
+                            /> 
                         </div>
                         <label>Trạng Thái :</label>
                         <select
@@ -129,8 +126,8 @@ const mapStateToProps = state => {
 };
 const mapDispatchToprops = (dispatch, props) => {
     return {
-        onAddTask: (task) => {
-            dispatch(action.addTask(task));
+        onSaveTask: (task) => {
+            dispatch(action.saveTask(task));
         },
         onCloseForm: () => {
             dispatch(action.closeform())

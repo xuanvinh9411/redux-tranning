@@ -6,16 +6,17 @@ export const list_all = () => {
     }
 }
 
-export const addTask = (task) => {
+export const saveTask = (task) => {
     return {
-        type: types.ADD_TASK,
+        type: types.SAVE_TASK,
         task
     }
 }
 
-export const toggleform =() =>{
+export const toggleform =(id) =>{
     return {
-        type : types.TOGGLE_FORM
+        type : types.TOGGLE_FORM,
+        id
     }
 }
 

@@ -5,64 +5,65 @@ import SearchForm from './components/SearchForm';
 import ListForm from './components/ListForm';
 // import _ from 'lodash';
 import { connect } from 'react-redux'
-import * as Action from './actions/index'
+import * as action from './actions/index'
 
 class App extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-        }
+        // this.state = {
+        // }
     }
-    componentWillMount() {
-        if (localStorage && localStorage.getItem('tasks')) {
-            var tasks = JSON.parse(localStorage.getItem('tasks'));
-            this.setState({
-                tasks: tasks
-            });
-        }
-    }
-    addForm = () => {
-        if (this.state.isDisplayForm && this.state.tasksEditing !== null) {
-            this.setState({
-                isDisplayForm: true,
-                tasksEditing: null
-            })
-        }
-        else {
-            this.setState({
-                isDisplayForm: !this.state.isDisplayForm,
-                tasksEditing: null
-            })
-        }
+    // componentWillMount() {
+    //     // if (localStorage && localStorage.getItem('tasks')) {
+    //     //     var tasks = JSON.parse(localStorage.getItem('tasks'));
+    //     //     this.setState({
+    //     //         tasks: tasks
+    //     //     });
+    //     // }
+    // }
+    // addForm = () => {
+    //     if (this.state.isDisplayForm && this.state.tasksEditing !== null) {
+    //         this.setState({
+    //             isDisplayForm: true,
+    //             tasksEditing: null
+    //         })
+    //     }
+    //     else {
+    //         this.setState({
+    //             isDisplayForm: !this.state.isDisplayForm,
+    //             tasksEditing: null
+    //         })
+    //     }
 
-    }
+    // }
 
-    closeForm = () => {
-        this.setState({
-            isDisplayForm: !this.state.isDisplayForm
-        })
-    }
+    // closeForm = () => {
+    //     this.setState({
+    //         isDisplayForm: !this.state.isDisplayForm
+    //     })
+    // }
 
-    showForm = () => {
-        this.setState({
-            isDisplayForm: true
-        })
-    }
+    // showForm = () => {
+    //     this.setState({
+    //         isDisplayForm: true
+    //     })
+    // }
 
 
     onToggleForm = () => {
-        this.props.onToggleForm()
-    }
+        var task = { 
+            id: '',
+            name: '',
+            status: true
+        }
+        this.props.onClearForm(task)
+        if(this.props.itemEditing && this.props.itemEditing.id !== ""){
+           this.props.onOpenForm()
+        }else{
+            this.props.onToggleForm(task.id)
+        }
 
-    onUpdate = (id) => {
-        var { tasks } = this.state
-        var index = this.findIndex(id);
-        // var tasksEditing = tasks[index]
-        this.setState({
-            // tasksEditing: tasksEditing
-        })
-        this.showForm();
     }
 
     onFilter = (filterName, filterStatus) => {
@@ -88,15 +89,15 @@ class App extends React.Component {
     }
 
     render() {
-        var {
-            // tasks,
-            // tasksEditing,
-            // filter,
-            // keyword,
-            sortBy,
-            sortValue
-        }
-            = this.state;
+        // var {
+        //     // tasks,
+        //     // tasksEditing,
+        //     // filter,
+        //     // keyword,
+        //     sortBy,
+        //     sortValue
+        // }
+        //     = this.state;
         var { isDisplayForm } = this.props;
         // if (filter) {
         //     if (filter.name) {
@@ -143,9 +144,7 @@ class App extends React.Component {
                 </div>
                 <div className="row">
                     <div className={isDisplayForm ? 'col-xs-4 col-sm-4 col-md-4 col-lg-4' : ''}>
-                        <TaskForm
-                            onSubmit={this.onSubmit}
-                        />
+                        <TaskForm />
                     </div>
                     <div className={isDisplayForm ? 'col-xs-8 col-sm-8 col-md-8 col-lg-8' : 'col-xs-12 col-sm-12 col-md-12 col-lg-12'}>
                         <button
@@ -157,17 +156,17 @@ class App extends React.Component {
                         </button>
                         <div className="row mt-15">
                             <SearchForm
-                                onSearch={this.onSearch}
-                                onSort={this.onSort}
-                                sortBy={sortBy}
-                                sortValue={sortValue}
+                                // onSearch={this.onSearch}
+                                // onSort={this.onSort}
+                                // sortBy={sortBy}
+                                // sortValue={sortValue}
                             />
                         </div>
                         <div className="row mt-15">
                             <ListForm
                                 // tasks={tasks}
-                                onUpdate={this.onUpdate}
-                                onFilter={this.onFilter}
+                                // onUpdate={this.onUpdate}
+                                // onFilter={this.onFilter}
                             />
                         </div>
                     </div>
@@ -179,13 +178,20 @@ class App extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        isDisplayForm: state.isDisplayForm
+        isDisplayForm: state.isDisplayForm,
+        itemEditing : state.itemEditing
     };
 }
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        onToggleForm: () => {
-            dispatch(Action.toggleform())
+        onToggleForm: (id) => {
+            dispatch(action.toggleform(id))
+        },
+        onClearForm : (task) =>{
+            dispatch(action.edititem(task))
+        },
+        onOpenForm : () =>{
+            dispatch(action.openform());
         }
     };
 }
