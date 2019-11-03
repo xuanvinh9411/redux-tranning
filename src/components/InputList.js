@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import * as action from './../actions/index';
+
 
 class InputList extends React.Component {
 
@@ -13,11 +16,12 @@ class InputList extends React.Component {
     onChange = (event) => {
         var target = event.target;
         var name = target.name;
-        var value = target.value
-        this.props.onFilter(
-            name === 'filterName' ? value : this.state.filterName,
-            name === 'filterStatus' ? value : this.state.filterStatus,
-        )
+        var value = target.value;
+        var filter = {
+            name : name === 'filterName' ? value : this.state.filterName,
+            status : name === 'filterStatus' ? parseInt(value) : this.state.filterStatus,
+        }
+        this.props.onFilterTable(filter)
         this.setState({
             [name] : value
         })
@@ -57,4 +61,19 @@ class InputList extends React.Component {
     }
 }
 
-export default InputList;
+const mapStateToProps = (state) =>{
+    return {
+        filter : state.task
+    }
+};
+
+const mapDispatchToprops = (dispatch , props) =>{
+    return {
+        onFilterTable : (filter) =>{
+            dispatch(action.filterTask(filter)) ;
+        }
+
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToprops)(InputList);

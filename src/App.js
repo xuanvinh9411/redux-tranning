@@ -3,7 +3,6 @@ import './App.css';
 import TaskForm from './components/TaskForm';
 import SearchForm from './components/SearchForm';
 import ListForm from './components/ListForm';
-// import _ from 'lodash';
 import { connect } from 'react-redux'
 import * as action from './actions/index'
 
@@ -11,46 +10,7 @@ class App extends React.Component {
 
     constructor(props) {
         super(props);
-        // this.state = {
-        // }
     }
-    // componentWillMount() {
-    //     // if (localStorage && localStorage.getItem('tasks')) {
-    //     //     var tasks = JSON.parse(localStorage.getItem('tasks'));
-    //     //     this.setState({
-    //     //         tasks: tasks
-    //     //     });
-    //     // }
-    // }
-    // addForm = () => {
-    //     if (this.state.isDisplayForm && this.state.tasksEditing !== null) {
-    //         this.setState({
-    //             isDisplayForm: true,
-    //             tasksEditing: null
-    //         })
-    //     }
-    //     else {
-    //         this.setState({
-    //             isDisplayForm: !this.state.isDisplayForm,
-    //             tasksEditing: null
-    //         })
-    //     }
-
-    // }
-
-    // closeForm = () => {
-    //     this.setState({
-    //         isDisplayForm: !this.state.isDisplayForm
-    //     })
-    // }
-
-    // showForm = () => {
-    //     this.setState({
-    //         isDisplayForm: true
-    //     })
-    // }
-
-
     onToggleForm = () => {
         var task = { 
             id: '',
@@ -89,53 +49,6 @@ class App extends React.Component {
     }
 
     render() {
-        // var {
-        //     // tasks,
-        //     // tasksEditing,
-        //     // filter,
-        //     // keyword,
-        //     sortBy,
-        //     sortValue
-        // }
-        //     = this.state;
-        var { isDisplayForm } = this.props;
-        // if (filter) {
-        //     if (filter.name) {
-        //         tasks = tasks.filter(task => {
-        //             return task.name.toLowerCase().indexOf(filter.name) !== -1;
-        //         });
-
-        //     }
-        //     tasks = tasks.filter(task => {
-        //         if (filter.status == -1) {
-        //             return task
-        //         } else {
-        //             return task.status === (filter.status === 1 ? true : false)
-        //         }
-        //     })
-        // }
-        // if (keyword && keyword !== "") {
-        //     // tasks = tasks.filter(task => {
-        //     //     return task.name.indexOf(keyword.keyword) !== -1;
-        //     // });
-        //     tasks = _.filter(tasks,(task) =>{
-        //         return task.name.toLowerCase().indexOf(keyword.keyword.toLowerCase()) !== -1
-        //         })
-        // }
-
-        // if (sortBy === 'name'){
-        //     tasks = tasks.sort((a,b) =>{
-        //         if(a.name > b.name) return sortValue ;
-        //         else if(a.name < b.name) return -sortValue ;
-        //         else return 0 ;
-        //     })
-        // }else{
-        //     tasks = tasks.sort((a,b) =>{
-        //         if(a.status > b.status) return -sortValue ;
-        //         else if(a.status < b.status) return sortValue ;
-        //         else return 0 ;
-        //     })
-        // }
         return (
             <div className="container">
                 <div className="text-center">
@@ -155,19 +68,10 @@ class App extends React.Component {
                             <span className="fa fa-plus mr-5"></span>Thêm Công Việc
                         </button>
                         <div className="row mt-15">
-                            <SearchForm
-                                // onSearch={this.onSearch}
-                                // onSort={this.onSort}
-                                // sortBy={sortBy}
-                                // sortValue={sortValue}
-                            />
+                            <SearchForm/>
                         </div>
                         <div className="row mt-15">
-                            <ListForm
-                                // tasks={tasks}
-                                // onUpdate={this.onUpdate}
-                                // onFilter={this.onFilter}
-                            />
+                            <ListForm/>
                         </div>
                     </div>
                 </div>

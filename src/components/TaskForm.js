@@ -5,11 +5,6 @@ import { connect } from 'react-redux';
 class TaskForm extends React.Component {
     constructor(props) {
         super(props);
-        // this.state = {
-        //     id: '',
-        //     name: '',
-        //     status: true
-        // }
     }
     componentWillMount() {
         if (this.props.task) {
